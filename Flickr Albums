@@ -1,4 +1,4 @@
-import urllib.request, urllib.error, urllib.parse, json, flickr_key, webbrowser
+import urllib.request, urllib.error, urllib.parse, json, webbrowser, jinja2, os
 
 ## safeGet from the lecture code ##
 def safeGet(url):
@@ -16,7 +16,7 @@ def safeGet(url):
 ## requests the information of all the albums of a specific users flickr account ##
 def flickrRESTListOfUserPhotos(baseurl = 'https://api.flickr.com/services/rest',
                   method = 'flickr.photosets.getList',
-                  api_key = flickr_key.flickrKey,
+                  api_key = 'c9ec635aa4c47910e4c47a07291cd4db',
                   format = 'json',
                   params = {},
                   printurl = False
@@ -27,26 +27,39 @@ def flickrRESTListOfUserPhotos(baseurl = 'https://api.flickr.com/services/rest',
        if format == "json":
            params['nojsoncallback'] = True
        url = baseurl + "?" + urllib.parse.urlencode(params)
+       if printurl:
+           print(url)
        return safeGet(url)
 
 resultUserPhotos = flickrRESTListOfUserPhotos(params={'user_id': "52503205@N07"}, printurl=True)
 responceUserPhotos = json.loads(resultUserPhotos.read())
 
-## Prints out a dictionary of each album within a spefic users profile and the id code that goes along with that album ##
-photoSetIDDict = {}
-
-def ListOfAllIDs():
+## Prints out a list of each album within a spefic users profile and the id code that goes along with that album ##
+def printListOfAllIDs():
+    print("--------List of ID codes for each classroom-----------")
+    photoSetIDList = []
+    photoSetIDListIndex = 0
     for classroom in responceUserPhotos['photosets']['photoset']:
-        photoSetIDDict[classroom['title']['_content']] = classroom['id']
+        photoSetIDList.append(classroom['id'])
+        print(str(classroom['title']['_content'])+":"+str(photoSetIDList[photoSetIDListIndex]))
+        photoSetIDListIndex += 1
 
-ListOfAllIDs()
+printListOfAllIDs()
 
 ## Takes in user input for the ID of the classroom albums they wish to see then opens said albums in a webbrowser ##
-listOfClasses = input("Enter a comma seprated list of classrooms without any spaces: ").split(",")
+listOfClasses = input("Enter a comma seprated list clasrooms ID code as listed above without any spaces: ").split(",")
+listofURLs = []
 for photoalbum in listOfClasses:
-    if photoalbum in photoSetIDDict:
-        photoalbum = photoSetIDDict[photoalbum]
-        webbrowser.open('http:/www.flickr.com/photos/52503205@N07/albums/'+photoalbum)
+     listofURLs.append('http:/www.flickr.com/photos/52503205@N07/albums/'+photoalbum)
+for x in listofURLs:
+    webbrowser.open(x)
 
-#*need to take the albums and grab individual photos to put in app*#
-#*need to take the individual photos to put into jinja to put into app engine*#
+
+thumbnailPhoto = {'albumURLS': listofURLs}
+f = open('flickralbums.html','w')
+JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+                                       extensions=['jinja2.ext.autoescape'],
+                                       autoescape=True)
+template = JINJA_ENVIRONMENT.get_template('flickrAlbumTemplate.html')
+f.write(template.render(thumbnailPhoto))
+f.close()

@@ -1,0 +1,12 @@
+<html>
+<head>
+	<title>DATAAAA</title>
+</head>
+<body>
+	{% for class in albumURLS %}
+	<h1 class='title'>{{class.title}}</h1>
+		<h2>class.listofURLS</h2>
+		<img src={{class.thumbnailURL}}/>
+	{% endfor %}
+</body>
+</html>
