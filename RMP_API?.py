@@ -54,7 +54,6 @@ class AppURLopener(urllib.request.FancyURLopener): #Code From: https://stackover
 
 def getScore(name, department=""):
 #How do we deal with edge cases with people with the same name?
-# Also doing more than one professor at once
     dict = rmp_REST(query=name, department=department)
     if dict["searchResultsTotal"] != 0:
         for professor in dict["professors"]:
@@ -66,5 +65,6 @@ def getScore(name, department=""):
         return "N/A"
 
 #TESTING CODE BELOW:
-professor = input("Professor's Name? ")
-print("Overall Rating: " + getScore(professor))
+professors = input("Enter comma separated list of professors ").split(", ")
+for professor in professors:
+    print(professor + "'s Overall Rating: " + getScore(professor))
