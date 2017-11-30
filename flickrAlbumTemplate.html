@@ -15,3 +15,10 @@
 	<input type="submit" value="Go" name"gobtn"/></form>
 </body>
 </html>
+
+	<h1>classroom</h1>
+	{% for photo in dictOfURLS[classroom] %}
+		<span class='photo'>
+			<img src={{photo}}/>
+		</span>
+	{% endfor %}
