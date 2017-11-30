@@ -1,64 +1,114 @@
 import urllib.request, urllib.error, urllib.parse, json, webbrowser, jinja2, os
 
-## safeGet from the lecture code ##
+# safeGet from the lecture code
 def safeGet(url):
-     try:
-         return urllib.request.urlopen(url)
-     except urllib.error.URLError as e:
-         if hasattr(e, "code"):
-             print("The server couldn't fulfill the request.")
-             print("Error code: ", e.code)
-         elif hasattr(e, 'reason'):
-             print("We failed to reach a server")
-             print("Reason: ", e.reason)
-         return None
+    try:
+        return urllib.request.urlopen(url)
+    except urllib.error.URLError as e:
+        if hasattr(e, "code"):
+            print("The server couldn't fulfill the request.")
+            print("Error code: ", e.code)
+        elif hasattr(e, 'reason'):
+            print("We failed to reach a server")
+            print("Reason: ", e.reason)
+        return None
 
-## requests the information of all the albums of a specific users flickr account ##
-def flickrRESTListOfUserPhotos(baseurl = 'https://api.flickr.com/services/rest',
-                  method = 'flickr.photosets.getList',
-                  api_key = 'c9ec635aa4c47910e4c47a07291cd4db',
-                  format = 'json',
-                  params = {},
-                  printurl = False
-                  ):
-       params['method'] = method
-       params['api_key'] = api_key
-       params['format'] = format
-       if format == "json":
-           params['nojsoncallback'] = True
-       url = baseurl + "?" + urllib.parse.urlencode(params)
-       if printurl:
-           print(url)
-       return safeGet(url)
+# from lecture code
+def flickrREST(baseurl='https://api.flickr.com/services/rest/',
+               method='flickr.photos.search',
+               api_key='c9ec635aa4c47910e4c47a07291cd4db',
+               format='json',
+               params={},
+               ):
+    params['method'] = method
+    params['api_key'] = api_key
+    params['format'] = format
+    if format == "json": params["nojsoncallback"] = True
+    url = baseurl + "?" + urllib.parse.urlencode(params)
+    return safeGet(url)
 
-resultUserPhotos = flickrRESTListOfUserPhotos(params={'user_id': "52503205@N07"}, printurl=True)
+# requests the information of all the albums of a specific users flickr account
+def flickrRESTListOfUserPhotos(baseurl='https://api.flickr.com/services/rest',
+                               method='flickr.photosets.getList',
+                               api_key='c9ec635aa4c47910e4c47a07291cd4db',
+                               format='json',
+                               params={},
+                               ):
+    params['method'] = method
+    params['api_key'] = api_key
+    params['format'] = format
+    if format == "json": params['nojsoncallback'] = True
+    url = baseurl + "?" + urllib.parse.urlencode(params)
+    return safeGet(url)
+
+# calls above method for the user of intrest
+resultUserPhotos = flickrRESTListOfUserPhotos(params={'user_id': "52503205@N07"})
 responceUserPhotos = json.loads(resultUserPhotos.read())
 
-## Prints out a dictionary of each album within a spefic users profile and the id code that goes along with that album ##
-photoSetIDDict = {}
+# requests the information of all the photos in an album of a specific users flickr account
+def flickrRESTListOfPhotosInAlbum(baseurl='https://api.flickr.com/services/rest',
+                                  method='flickr.photosets.getPhotos',
+                                  api_key='c9ec635aa4c47910e4c47a07291cd4db',
+                                  format='json',
+                                  params={},
+                                  ):
+    params['method'] = method
+    params['api_key'] = api_key
+    params['format'] = format
+    if format == "json":
+        params['nojsoncallback'] = True
+    url = baseurl + "?" + urllib.parse.urlencode(params)
+    return safeGet(url)
 
-def ListOfAllIDs():
+# creates a dictionary of each album within a spefic users profile and the id code that goes along with that album
+def classroomAndItsID():
+    photoSetIDDict = {}
     for classroom in responceUserPhotos['photosets']['photoset']:
         photoSetIDDict[classroom['title']['_content']] = classroom['id']
+    return photoSetIDDict
 
-ListOfAllIDs()
+# converts an album to a list of each photo
+# creates a dictornay with photo album ID as key and list of photo ID's as value
+def photoAlbumtoIndividual(photoalbum):
+    DictofPhotosIDInClassroomAlbum = {}
+    resultPhotosInAlbum = flickrRESTListOfPhotosInAlbum(params={'user_id': "52503205@N07", 'photoset_id': photoalbum})
+    responcePhotosInAlbum = json.loads(resultPhotosInAlbum.read())
+    listofPhotoIDs = []
+    for eachPhoto in responcePhotosInAlbum['photoset']['photo']:
+        listofPhotoIDs.append(eachPhoto['id'])
+    DictofPhotosIDInClassroomAlbum[photoalbum] = listofPhotoIDs
+    return DictofPhotosIDInClassroomAlbum
 
-## Takes in user input for the ID of the classroom albums they wish to see then opens said albums in a webbrowser ##
-listOfClasses = input("Enter a comma seprated list of classrooms without any spaces: ").split(",")
-for photoalbum in listOfClasses:
-    if photoalbum in photoSetIDDict:
-        photoalbum = photoSetIDDict[photoalbum]
-        webbrowser.open('http:/www.flickr.com/photos/52503205@N07/albums/'+photoalbum)
+# creates a dictonary of the URLS for each photo within an album
+def IDstoURLS(photoalbum, photoalbumID):
+    DictofPhotosIDInClassroomAlbum = photoAlbumtoIndividual(photoalbumID)
+    dictOfURLS = {}
+    listOfThumbnailURLs = []
+    for individualID in DictofPhotosIDInClassroomAlbum[photoalbumID]:
+        thumbnailInfo = \
+        json.loads(flickrREST(method='flickr.photos.getInfo', params={'photo_id': individualID}).read())['photo']
+        thumbnailURL = 'https://farm' + str(thumbnailInfo['farm']) + '.staticflickr.com/' + str(thumbnailInfo['server']) + '/' + str(individualID) + '_' + str(thumbnailInfo['secret']) + '_q.jpg'
+        listOfThumbnailURLs.append(thumbnailURL)
+    dictOfURLS[photoalbum] = listOfThumbnailURLs
+    return dictOfURLS
 
-#*need to take the albums and grab individual photos to put in app*#
-#*need to take the individual photos to put into jinja to put into app engine*#
+# takes in user input for the classroom they wish to see and calls other methods to create a dictorary where the
+# classroom maps to thumbnail URLs for each photo of the classroom interior
+def userInputToURLs():
+    listOfClasses = input("Enter a comma seprated list of classrooms without spaces after the commas: ").split(",")
+    for photoalbum in listOfClasses:
+        photoSetIDDict = classroomAndItsID()
+        if photoalbum in photoSetIDDict:
+            photoalbumID = photoSetIDDict[photoalbum]
+            URLS = IDstoURLS(photoalbum, photoalbumID)
+    return URLS
 
-
-# thumbnailPhoto = {'albumURLS': listofURLs}
+# *need to take the individual photos to put into jinja to put into app engine*#
+thumbnailPhoto = userInputToURLs()
 f = open('flickralbums.html','w')
 JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
                                        extensions=['jinja2.ext.autoescape'],
                                        autoescape=True)
 template = JINJA_ENVIRONMENT.get_template('flickrAlbumTemplate.html')
-# f.write(template.render(thumbnailPhoto))
-# f.close()
+f.write(template.render(thumbnailPhoto))
+f.close()

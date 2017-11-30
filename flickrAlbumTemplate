@@ -1,12 +1,15 @@
 <html>
 <head>
-	<title>DATAAAA</title>
+<title>Flickr Classroom Photos</title>
 </head>
 <body>
-	{% for class in albumURLS %}
-	<h1 class='title'>{{class.title}}</h1>
-		<h2>class.listofURLS</h2>
-		<img src={{class.thumbnailURL}}/>
-	{% endfor %}
+<h1>Photos per classroom</h1>
+<p>Once a classroom is submited, this app will post photos of the inside of the classroom</p>
+<br>
+<h2>Enter a classroom below!</h2>
+<form action="??" method="??">
+	<label for="classroom">Please enter a classroom:</label>
+	<input type="text" id="classroom" name="classroom"/>
+	<input type="submit" value="Go" name"gobtn"/></form>
 </body>
 </html>
