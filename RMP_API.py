@@ -27,7 +27,7 @@ def rmp_REST(baseurl = 'http://www.ratemyprofessors.com/find/professor/',
     sortBy = "teacherlastname_sort_s asc",
     format = "json",
     params={},
-    printurl = True #should default false, set to true for testing purposes
+    printurl = False
     ):
     params['department'] = department
     params['institution'] = instituition
@@ -58,7 +58,7 @@ def getScore(name, department=""):
     dict = rmp_REST(query=name, department=department)
     if dict["searchResultsTotal"] != 0:
         for professor in dict["professors"]:
-            if professor["overall_rating"] == "N/A":
+            #if professor["overall_rating"] == "N/A":
                 #print("Not Enough Reviews to Score")
             return professor["overall_rating"]
     else:
@@ -66,10 +66,8 @@ def getScore(name, department=""):
         return "N/A"
 
 #Working with the rest of the files.
-import centralfile
-professor = centralfile.professor
-professorNoComma = professor.replace(",", " ")
-print(professorNoComma)
-professorSplit = professorNoComma.split()
-professorSearch= professorSplit[0] + " " + professorSplit[1]
-getScore(professorSearch)
+def sendScore(professor):
+    professorNoComma = professor.replace(",", " ")
+    professorSplit = professorNoComma.split()
+    professorSearch= professorSplit[0] + " " + professorSplit[1]
+    return getScore(professorSearch)

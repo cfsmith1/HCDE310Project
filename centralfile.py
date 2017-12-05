@@ -1,4 +1,5 @@
 import json, jinja2
+import RMP_API
 
 #JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
 #    extensions=['jinja2.ext.autoescape'],
@@ -13,6 +14,9 @@ with open('data.txt', 'r') as myfile:
 #Get RateMyProfessor
 professor = dict[str(SLN)]["instructor"]
 print(professor)
+score = RMP_API.sendScore(professor)
+print(score)
+
 
 
 
