@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flickr Classroom Photos</title>
+</head>
+<body>
+<h1>Photos per classroom</h1>
+<p>Once a classroom is submited, this app will post photos of the inside of the classroom</p>
+<br>
+<h2>Enter a classroom below!</h2>
+<form action="??" method="??">
+	<label for="classroom">Please enter a classroom:</label>
+	<input type="text" id="classroom" name="classroom"/>
+	<input type="submit" value="Go" name"gobtn"/></form>
+</body>
+</html>
+
+	<h1>classroom</h1>
+	{% for photo in dictOfURLS[classroom] %}
+		<span class='photo'>
+			<img src={{photo}}/>
+		</span>
+	{% endfor %}
