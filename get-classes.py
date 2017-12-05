@@ -20,11 +20,10 @@ def addToDict(link):
         souplocal = BeautifulSoup(htmlstring, "html.parser")
         #print(souplocal.prettify())
         for course in souplocal.find_all('pre'):
-            answer = str(course).split()[2]
-            if (answer and answer[0:4] == "href"):
+            searchObj = re.search(r'>(\d{5})<\/a>', str(course), re.M | re.I)
+            if (searchObj):
 
                 #retrieves SLN
-                searchObj = re.search( r'>(\d{5})<\/a>', str(course), re.M|re.I)
                 SLN = searchObj.group()[1:-4]
                 class_dict[SLN] = {}
 
