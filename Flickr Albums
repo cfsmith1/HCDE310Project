@@ -95,10 +95,11 @@ def IDstoURLS(photoalbum, photoalbumID):
 # takes in user input for the classroom they wish to see and calls other methods to create a dictorary where the
 # classroom maps to thumbnail URLs for each photo of the classroom interior
 def userInputToURLs():
-    listOfClasses = centralfile.building_and_num
-    for photoalbum in listOfClasses:
-        photoSetIDDict = classroomAndItsID()
-        if photoalbum in photoSetIDDict:
-            photoalbumID = photoSetIDDict[photoalbum]
-            URLS = IDstoURLS(photoalbum, photoalbumID)
-    return URLS
+    classroomFromCentral = centralfile.building_and_num
+    photoSetIDDict = classroomAndItsID()
+    if classroomFromCentral in photoSetIDDict:
+        photoalbumID = photoSetIDDict[classroomFromCentral]
+        URLS = IDstoURLS(classroomFromCentral, photoalbumID)
+        return URLS
+    else:
+        return "no photos of classroom avaiable"
