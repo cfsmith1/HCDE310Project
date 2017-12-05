@@ -1,4 +1,4 @@
-import urllib.request, urllib.error, urllib.parse, json, centralfile
+import urllib.request, urllib.error, urllib.parse, json
 
 # safeGet from the lecture code
 def safeGet(url):
@@ -94,12 +94,11 @@ def IDstoURLS(photoalbum, photoalbumID):
 
 # takes in user input for the classroom they wish to see and calls other methods to create a dictorary where the
 # classroom maps to thumbnail URLs for each photo of the classroom interior
-def userInputToURLs():
-    classroomFromCentral = centralfile.building_and_num
+def userInputToURLs(inputFromCentral):
     photoSetIDDict = classroomAndItsID()
-    if classroomFromCentral in photoSetIDDict:
-        photoalbumID = photoSetIDDict[classroomFromCentral]
-        URLS = IDstoURLS(classroomFromCentral, photoalbumID)
+    if inputFromCentral in photoSetIDDict:
+        photoalbumID = photoSetIDDict[inputFromCentral]
+        URLS = IDstoURLS(inputFromCentral, photoalbumID)
         return URLS
     else:
         return "no photos of classroom avaiable"
