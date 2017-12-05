@@ -66,6 +66,6 @@ def getScore(name, department=""):
         return "N/A"
 
 #TESTING CODE BELOW:
-professors = input("Enter comma separated list of professors ").split(", ")
-for professor in professors:
-    print(professor + "'s Overall Rating: " + getScore(professor))
+import centralfile
+professor = centralfile.professor
+getScore(professor)
