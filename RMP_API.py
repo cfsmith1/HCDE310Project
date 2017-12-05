@@ -59,13 +59,17 @@ def getScore(name, department=""):
     if dict["searchResultsTotal"] != 0:
         for professor in dict["professors"]:
             if professor["overall_rating"] == "N/A":
-                print("Not Enough Reviews to Score")
+                #print("Not Enough Reviews to Score")
             return professor["overall_rating"]
     else:
-        print("Professor not found")
+        #print("Professor not found")
         return "N/A"
 
-#TESTING CODE BELOW:
+#Working with the rest of the files.
 import centralfile
 professor = centralfile.professor
-getScore(professor)
+professorNoComma = professor.replace(",", " ")
+print(professorNoComma)
+professorSplit = professorNoComma.split()
+professorSearch= professorSplit[0] + " " + professorSplit[1]
+getScore(professorSearch)
