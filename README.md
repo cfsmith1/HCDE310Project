@@ -1,9 +1,5 @@
 # HCDE310Project
-<<<<<<< HEAD
- 
-=======
 
->>>>>>> 7ceb91b5734ed2872472f05f16850b0be9f80453
 ## [Name of App]
 
 ### [Intro]
@@ -27,4 +23,3 @@ time or place.
 #### RMP_API?.py
 1. Cannot handle searches of both professor name and department
 2. Cannot differentiate professors if two professors have the same name and teach at the same school
->>>>>>> 08bdc471a7cdaeac638c0a7805af9170277baad3
