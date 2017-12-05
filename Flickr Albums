@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import urllib.request, urllib.error, urllib.parse, json, webbrowser, jinja2, os
+=======
+import urllib.request, urllib.error, urllib.parse, json, centralfile
+>>>>>>> b054661f4e6c5290a731343250d67eb66e41c00d
 
 # safeGet from the lecture code
 def safeGet(url):
@@ -95,12 +99,17 @@ def IDstoURLS(photoalbum, photoalbumID):
 # takes in user input for the classroom they wish to see and calls other methods to create a dictorary where the
 # classroom maps to thumbnail URLs for each photo of the classroom interior
 def userInputToURLs():
+<<<<<<< HEAD
     listOfClasses = input("Enter a comma seprated list of classrooms without spaces after the commas: ").split(",")
+=======
+    listOfClasses = centralfile.building_and_num
+>>>>>>> b054661f4e6c5290a731343250d67eb66e41c00d
     for photoalbum in listOfClasses:
         photoSetIDDict = classroomAndItsID()
         if photoalbum in photoSetIDDict:
             photoalbumID = photoSetIDDict[photoalbum]
             URLS = IDstoURLS(photoalbum, photoalbumID)
+<<<<<<< HEAD
     return URLS
 
 # *need to take the individual photos to put into jinja to put into app engine*#
@@ -112,3 +121,6 @@ JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
 template = JINJA_ENVIRONMENT.get_template('flickrAlbumTemplate.html')
 f.write(template.render(thumbnailPhoto))
 f.close()
+=======
+    return URLS
+>>>>>>> b054661f4e6c5290a731343250d67eb66e41c00d
