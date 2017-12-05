@@ -1,5 +1,9 @@
 # HCDE310Project
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 7ceb91b5734ed2872472f05f16850b0be9f80453
 ## [Name of App]
 
 ### [Intro]
