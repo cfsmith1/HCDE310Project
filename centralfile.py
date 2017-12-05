@@ -1,5 +1,7 @@
 import json, jinja2
 import RMP_API
+#COURTNEY READ THIS!!: Please change the name of your "Flickr Album" file to remove the space so that we can import it.
+# Then we can do "import Flickr_Album" and then basically copy what Zoe did with hers.
 
 #JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
 #    extensions=['jinja2.ext.autoescape'],
