@@ -27,7 +27,7 @@ def rmp_REST(baseurl = 'http://www.ratemyprofessors.com/find/professor/',
     sortBy = "teacherlastname_sort_s asc",
     format = "json",
     params={},
-    printurl = False
+    printurl = True #should default false, set to true for testing purposes
     ):
     params['department'] = department
     params['institution'] = instituition
@@ -54,6 +54,7 @@ class AppURLopener(urllib.request.FancyURLopener): #Code From: https://stackover
 
 def getScore(name, department=""):
 #How do we deal with edge cases with people with the same name?
+#Also getting the a query AND department search is not working????
     dict = rmp_REST(query=name, department=department)
     if dict["searchResultsTotal"] != 0:
         for professor in dict["professors"]:
