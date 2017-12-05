@@ -12,6 +12,7 @@ with open('data.txt', 'r') as myfile:
 #print(str(dict))
 #Get RateMyProfessor
 professor = dict[str(SLN)]["instructor"]
+print(professor)
 
 
 
@@ -19,3 +20,4 @@ professor = dict[str(SLN)]["instructor"]
 building = dict[str(SLN)]["building"]
 roomnum = dict[str(SLN)]["room"]
 building_and_num = building + " " + roomnum
+print(building_and_num)
