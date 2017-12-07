@@ -26,15 +26,13 @@
 </head>
 <body style= "background-color: #E9CFEC">
     <div class="inputBox">
-        <h1>Information about {{SLN}}</h1>
+        <h1>Information about SLN: {{SLN}}</h1>
     </div>
     <div class="inputBox">
         <h2>Classroom Photos</h2>
-        <div>Classroom: {{classroom}}</div>
+        <div>Classroom: <strong>{{classroom}}</strong></div>
         {% for photo in thumbnails %}
-            <span class='photo'>
-	    	    <img src={{photo}} alt = {{SLN}}/>
-	        </span>
+            <img src={{photo}} alt = {{SLN}}>
         {% endfor %}
     </div>
     <div class="inputBox">
