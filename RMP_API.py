@@ -2,7 +2,7 @@ import json
 #import urllib.request
 #import urllib.error
 #import urllib.parse
-import ssl
+#import ssl
 import urllib2
 import urllib
 from urlparse import urlparse
