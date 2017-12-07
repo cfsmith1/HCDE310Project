@@ -48,7 +48,7 @@ class GreetResponseHandlr(webapp2.RequestHandler):
             building = dict[str(SLN)]["building"]
             roomnum = dict[str(SLN)]["room"]
             building_and_num = building + " " + roomnum
-            htmlInfo = {'score': getProfessor(SLN, dict), 'thumbnails': getClassroom(SLN, dict), 'SLN': getSLN(),
+            htmlInfo = {'score': getProfessor(SLN, dict), 'thumbnails': getClassroom(SLN, dict), 'SLN': SLN,
                         'professor': dict[SLN]["instructor"], 'classroom': building_and_num}
             fname = "your_class_response.html"
             template = JINJA_ENVIRONMENT.get_template(fname)
@@ -58,8 +58,6 @@ class GreetResponseHandlr(webapp2.RequestHandler):
             template = JINJA_ENVIRONMENT.get_template('your_class_form.html')
             htmlInfo = {'page_title': 'ERROR'}
             self.response.write(template.render(htmlInfo))
-
-
 
         #template_values = {}
         #template_values['page_title'] = "Flickr Tag Search"
