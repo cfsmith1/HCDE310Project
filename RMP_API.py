@@ -1,9 +1,11 @@
 import json
 #import urllib.request
-import urllib.error
-import urllib.parse
+#import urllib.error
+#import urllib.parse
 import ssl
 import urllib2
+import urllib
+from urlparse import urlparse
 
 def pretty(obj):
     return json.dumps(obj, sort_keys=True, indent=2)
@@ -11,7 +13,7 @@ def pretty(obj):
 def safe_URL(url):
     try:
         return url
-    except urllib.error.URLError as e:
+    except urllib2.URLError as e:
         if hasattr(e, 'reason'):
             print("Reason:", e.reason)
         elif hasattr(e, "code"):
@@ -41,7 +43,9 @@ def rmp_REST(baseurl = 'http://www.ratemyprofessors.com/find/professor/',
     params['sortBy'] = sortBy
     params["format"] = format
     if format == "json": params["nojsoncallback"]=True
-    url = baseurl + "?" + urllib.parse.urlencode(params)
+    data = urllib.urlencode(params)
+    #data = data.encode('Big5')
+    url = baseurl + "?" + data#urllib.parse.urlencode(params)
     if printurl:
         print(url)
     safeURL = safe_URL(url)
