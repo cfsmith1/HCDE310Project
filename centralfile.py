@@ -39,4 +39,4 @@ f = open(fname,"w")
 
 f.write(template.render(htmlInfo))
 f.close()
-webbrowser.open('ClassesTemplate.html')
+webbrowser.open('your-class.html')
