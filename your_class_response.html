@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UW Classroom Info</title>
+</head>
+<body>
+<h1>Information about {{SLN}}</h1>
+<h1>Classroom Photos</h1>
+<div>Classroom: {{classroom}}</div>
+{% for photo in thumbnails %}
+	<span class='photo'>
+		<img src={{photo}} alt = {{SLN}}/>
+	</span>
+{% endfor %}
+
+<h1>Professor Info</h1>
+<div>Professor name: {{professor}}</div>
+<div>Rate My Professor Score: {{ score }}</div>
+
+</body>
