@@ -1,4 +1,4 @@
-import json, jinja2, RMP_API, flickr_albums, os, webbrowser
+import json, jinja2, RMP_API, flickr_albums, os, webbrowser, urllib
 
 JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
