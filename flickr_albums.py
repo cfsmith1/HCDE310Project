@@ -79,8 +79,8 @@ def photoAlbumtoIndividual(photoalbum):
     DictofPhotosIDInClassroomAlbum[photoalbum] = listofPhotoIDs
     return DictofPhotosIDInClassroomAlbum
 
-# creates a dictonary of the URLS for each photo within an album
-def IDstoURLS(photoalbum, photoalbumID):
+# creates a list of the thumbnail URLS for each photo within an album
+def IDstoURLS(photoalbumID):
     DictofPhotosIDInClassroomAlbum = photoAlbumtoIndividual(photoalbumID)
     listOfThumbnailURLs = []
     for individualID in DictofPhotosIDInClassroomAlbum[photoalbumID]:
@@ -96,7 +96,7 @@ def userInputToURLs(inputFromCentral):
     photoSetIDDict = classroomAndItsID()
     if inputFromCentral in photoSetIDDict:
         photoalbumID = photoSetIDDict[inputFromCentral]
-        URLS = IDstoURLS(inputFromCentral, photoalbumID)
+        URLS = IDstoURLS(photoalbumID)
         return URLS
     else:
         return "no photos of classroom avaiable"
