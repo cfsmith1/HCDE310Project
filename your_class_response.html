@@ -1,21 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
     <meta charset="UTF-8">
     <title>UW Classroom Info</title>
-</head>
-<body>
-<h1>Information about {{SLN}}</h1>
-<h1>Classroom Photos</h1>
-<div>Classroom: {{classroom}}</div>
-{% for photo in thumbnails %}
-	<span class='photo'>
-		<img src={{photo}} alt = {{SLN}}/>
-	</span>
-{% endfor %}
+        <style>
+        form {font-family: 'Roboto', sans-serif;margin:6px}
+        body {font-family: 'Roboto', sans-serif;margin:6px}
+        h2 {font-family: 'Oswald', sans-serif;font-size: 24px;margin:6px}
+        h1 {font-family: 'Oswald', sans-serif;font-size: 42px;margin:6px}
+        div.inputBox {
+            margin: 15px;
+            padding: 10px;
+            background-color: #ffffff;
+            border: 3px solid black;
+        }
 
-<h1>Professor Info</h1>
-<div>Professor name: {{professor}}</div>
-<div>Rate My Professor Score: {{ score }}</div>
+        div.inputBox p {
+            margin: 10px;
+            font-weight: bold;
+            color: #000000;
+        }
+    </style>
+</head>
+<body style= "background-color: #E9CFEC">
+    <div class="inputBox">
+        <h1>Information about {{SLN}}</h1>
+    </div>
+    <div class="inputBox">
+        <h2>Classroom Photos</h2>
+        <div>Classroom: {{classroom}}</div>
+        {% for photo in thumbnails %}
+            <span class='photo'>
+	    	    <img src={{photo}} alt = {{SLN}}/>
+	        </span>
+        {% endfor %}
+    </div>
+    <div class="inputBox">
+        <h2>Professor Info:</h2>
+        <div>Professor name: {{professor}}</div>
+        <div>Rate My Professor Score: {{ score }}</div>
+    </div>
 
 </body>
