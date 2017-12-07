@@ -1,4 +1,4 @@
-import json, jinja2, RMP_API, flickr_albums, os
+import json, jinja2, RMP_API, flickr_albums, os, webbrowser
 
 JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
@@ -33,6 +33,7 @@ f = open(fname, 'w')
 #template_values['page_title'] = "Flickr Tag Search"
 
 template = JINJA_ENVIRONMENT.get_template('ClassesTemplate.html')
+f = open(fname,"w")
 
 #response.write(template.render(template_values))
 
