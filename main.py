@@ -14,9 +14,9 @@ def getDict():
 
 def getProfessor(SLN, dict):
     professor = dict[str(SLN)]["instructor"]
-    print(professor)
+    print professor
     score = RMP_API.sendScore(professor)
-    print(score)
+    print score
     return score
 
 #Get Classroom Info
@@ -25,7 +25,7 @@ def getClassroom(SLN, dict):
     roomnum = dict[str(SLN)]["room"]
     building_and_num = building + " " + roomnum
     thumbnailsList = flickr_albums.userInputToURLs(building_and_num)
-    print(thumbnailsList)
+    print thumbnailsList
     return thumbnailsList
 
 class MainHandler(webapp2.RequestHandler):
@@ -43,7 +43,7 @@ class GreetResponseHandlr(webapp2.RequestHandler):
         dict = getDict()
 
         if SLN:
-            SLN = self.request.get('SLN')
+            #SLN = self.request.get('SLN')
             #vals['SLN'] = SLN
             building = dict[str(SLN)]["building"]
             roomnum = dict[str(SLN)]["room"]
