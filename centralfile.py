@@ -22,3 +22,19 @@ building_and_num = building + " " + roomnum
 print(building_and_num)
 thumbnailsList = flickr_albums.userInputToURLs(building_and_num)
 print(thumbnailsList)
+
+
+
+htmlPhotos = {'view': rankedByViews[0:3], 'tag': rankedByTags[0:3], 'comment': rankedByComments[0:3]}
+f = open('flickrAlbumTemplate.html', 'w')
+
+template_values = {}
+template_values['page_title'] = "Flickr Tag Search"
+
+template = JINJA_ENVIRONMENT.get_template('flickrAlbumTemplate.html')
+
+response.write(template.render(template_values))
+
+f.write(template.render(htmlPhotos))
+f.close()
+webbrowser.open('flickrAlbumTemplate.html')
