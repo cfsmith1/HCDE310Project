@@ -8,28 +8,33 @@
         body {font-family: 'Roboto', sans-serif;}
         h2 {font-family: 'Roboto', sans-serif;}
         h1 {font-family: 'Oswald', sans-serif;font-size: 42px;margin:12px}
-        div.transbox {
-            margin: 30px;
+        div.inputBox {
+            margin: 15px;
+            padding: 10px;
             background-color: #ffffff;
-            border: 1px solid black;
-            opacity: 0.6;
-            filter: alpha(opacity=60); /* For IE8 and earlier */
+            border: 3px solid black;
         }
 
-        div.transbox p {
+        div.inputBox p {
             margin: 5%;
             font-weight: bold;
             color: #000000;
         }
     </style>
 </head>
-<body>
-<h1>UW Classroom Info</h1>
-<p>Submit a UW class SLN and this app will post photos of the inside of the classroom and the Professor's Rate My Professor score</p>
-<h2>Enter SLN below:</h2>
-<form action="gresponse" method="post">
-	<label for="SLN">Please enter a SLN:</label>
-	<input type="text" id="SLN" name="SLN"/>
-	<input type="submit" value="Go" name"gobtn"/></form>
+<body style= "background-color: #E9CFEC">
+    <div class="inputBox">
+        <h1>UW Classroom Info</h1>
+        <p>Submit a UW class SLN and this app will post photos of the inside of the classroom and the Professor's Rate My Professor score.</p>
+    </div>
+        <div class="inputBox">
+            <h2>Enter SLN below:</h2>
+            <form action="gresponse" method="post">
+                <label for="SLN">Please enter a SLN:</label>
+	            <input type="text" id="SLN" name="SLN"/>
+	            <input type="submit" value="Go" name"gobtn"/>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
