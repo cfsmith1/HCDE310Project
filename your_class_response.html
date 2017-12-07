@@ -31,9 +31,13 @@
     <div class="inputBox">
         <h2>Classroom Photos</h2>
         <div>Classroom: <strong>{{classroom}}</strong></div>
-        {% for photo in thumbnails %}
-            <img src={{photo}} alt = {{SLN}}>
-        {% endfor %}
+        {% if thumbnails %}
+            {% for photo in thumbnails %}
+                <img src={{photo}} alt = {{SLN}}>
+            {% endfor %}
+        {% else %}
+            <body>There are no images available for this classroom.</body>
+        {% endif %}
     </div>
     <div class="inputBox">
         <h2>Professor Info:</h2>
