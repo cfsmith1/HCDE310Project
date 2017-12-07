@@ -1,47 +1,51 @@
 buildings = {
-    "Anderson"
-    "Architecture"
-    Art
-    Bagley
-    Benson
-    Bloedel
-    Chemistry Library
-    Clark
-    Communications
-    Condon
-    Dempsey
-    Denny
-    Eagleson
-    Electrical Engineering
-    Executive Education
-    Fisheries Sciences
-    Fisheries Teaching
-    Gould
-    Gowen
-    Guggenheim
-    Hitchcock
-    Johnson
-    Kane
-    Loew
-    Marine Studies
-    Mary Gates
-    Mechanical Engineering
-    Miller
-    More
-    Mueller
-    Music
-    Observatory
-    Ocean Teaching
-    OUGL
-    PACCAR
-    Parrington
-    Physics and Astronomy
-    Raitt
-    Savery
-    Sieg
-    Smith
-    Social Work
-    Thomson
-    Winkenwerder
-
+    "AND": "Anderson",
+    "ARC": "Architecture",
+    "ART": "Art",
+    "BAG": "Bagley",
+    "BNS": "Benson",
+    "BLD": "Bloedel",
+    "CHL": "Chemistry Library",
+    "CLK": "Clark",
+    "CMU": "Communications",
+    "CDH": "Condon",
+    "DEM": "Dempsey",
+    "DEN": "Denny",
+    "EGL": "Eagleson",
+    "EE1": "Electrical Engineering",
+    "EXED": "Executive Education",
+    "FSH": "Fisheries Sciences",
+    "FTR": "Fisheries Teaching",
+    "GLD": "Gould",
+    "GWN": "Gowen",
+    "GUG": "Guggenheim",
+    "HCK": "Hitchcock",
+    "JHN": "Johnson",
+    "KNE": "Kane",
+    "LOW": "Loew",
+    "MAR": "Marine Studies",
+    "MGH": "Mary Gates",
+    "MEB": "Mechanical Engineering",
+    "MLR": "Miller",
+    "MOR": "More",
+    "MUE": "Mueller",
+    "MUS": "Music",
+    "OBS": "Observatory",
+    "OTB": "Ocean Teaching",
+    "OUG": "OUGL",
+    "PCAR": "PACCAR",
+    "PAR": "Parrington",
+    "PAB": "Physics and Astronomy",
+    "PAA": "Physics and Astronomy",
+    "RAI": "Raitt",
+    "SAV": "Savery",
+    "SIG": "Sieg",
+    "SMI": "Smith",
+    "SWS": "Social Work",
+    "THO": "Thomson",
+    "WFS": "Winkenwerder",
 }
+
+def convert(building):
+    if buildings.contains_key(building):
+        return buildings[building]
