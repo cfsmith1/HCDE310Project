@@ -25,16 +25,17 @@ print(thumbnailsList)
 
 
 
-htmlPhotos = {'view': rankedByViews[0:3], 'tag': rankedByTags[0:3], 'comment': rankedByComments[0:3]}
-f = open('flickrAlbumTemplate.html', 'w')
+htmlInfo = {'score': score, 'thumbnails': thumbnailsList, 'SLN': SLN, 'professor': dict[SLN]["instructor"]}
+fname = "your-class.html"
+f = open(fname, 'w')
 
-template_values = {}
-template_values['page_title'] = "Flickr Tag Search"
+#template_values = {}
+#template_values['page_title'] = "Flickr Tag Search"
 
-template = JINJA_ENVIRONMENT.get_template('flickrAlbumTemplate.html')
+template = JINJA_ENVIRONMENT.get_template('ClassesTemplate.html')
 
-response.write(template.render(template_values))
+#response.write(template.render(template_values))
 
-f.write(template.render(htmlPhotos))
+f.write(template.render(htmlInfo))
 f.close()
-webbrowser.open('flickrAlbumTemplate.html')
+webbrowser.open('ClassesTemplate.html')
