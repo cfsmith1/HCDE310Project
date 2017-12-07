@@ -51,6 +51,7 @@ class GreetResponseHandlr(webapp2.RequestHandler):
             htmlInfo = {'score': getProfessor(SLN, dict), 'SLN': SLN,
                         'professor': dict[SLN]["instructor"], 'classroom': building_and_num}
             thumbnails = getClassroom(SLN, dict)
+            #htmlInfo['thumbnails-text'] = str(thumbnails)
             if thumbnails:
                 htmlInfo['thumbnails'] = thumbnails
             fname = "your_class_response.html"

@@ -109,4 +109,4 @@ def userInputToURLs(inputFromCentral):
         URLS = IDstoURLS(photoalbumID)
         return URLS
     else:
-        return "no photos of classroom avaiable"
+        return []
