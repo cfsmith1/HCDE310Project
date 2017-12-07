@@ -1,10 +1,14 @@
-import urllib.request, urllib.error, urllib.parse, json
+import json #urllib.request, urllib.error, urllib.parse, json
+import urllib2
+import urllib
+from urlparse import urlparse
 
 # safeGet from the lecture code
 def safeGet(url):
     try:
-        return urllib.request.urlopen(url)
-    except urllib.error.URLError as e:
+        req = urllib2.Request(url)
+        return urllib2.urlopen(req)
+    except urllib2.URLError as e:
         if hasattr(e, "code"):
             print("The server couldn't fulfill the request.")
             print("Error code: ", e.code)
@@ -24,7 +28,9 @@ def flickrREST(baseurl='https://api.flickr.com/services/rest/',
     params['api_key'] = api_key
     params['format'] = format
     if format == "json": params["nojsoncallback"] = True
-    url = baseurl + "?" + urllib.parse.urlencode(params)
+    #url = baseurl + "?" + urllib.parse.urlencode(params)
+    data = urllib.urlencode(params)
+    url = baseurl + "?" + data
     return safeGet(url)
 
 # requests the information of all the albums of a specific users flickr account
@@ -38,7 +44,9 @@ def flickrRESTListOfUserPhotos(baseurl='https://api.flickr.com/services/rest',
     params['api_key'] = api_key
     params['format'] = format
     if format == "json": params['nojsoncallback'] = True
-    url = baseurl + "?" + urllib.parse.urlencode(params)
+    #url = baseurl + "?" + urllib.parse.urlencode(params)
+    data = urllib.urlencode(params)
+    url = baseurl + "?" + data
     return safeGet(url)
 
 # calls above method for the user of intrest
@@ -57,7 +65,9 @@ def flickrRESTListOfPhotosInAlbum(baseurl='https://api.flickr.com/services/rest'
     params['format'] = format
     if format == "json":
         params['nojsoncallback'] = True
-    url = baseurl + "?" + urllib.parse.urlencode(params)
+    #url = baseurl + "?" + urllib.parse.urlencode(params)
+    data = urllib.urlencode(params)
+    url = baseurl + "?" + data
     return safeGet(url)
 
 # creates a dictionary of each album within a spefic users profile and the id code that goes along with that album
