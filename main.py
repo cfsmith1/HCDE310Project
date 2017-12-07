@@ -30,7 +30,7 @@ def getClassroom(SLN, dict):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        logging.info("In MainHandler")
+        #logging.info("In MainHandler")
         template_values = {}
         template_values['page_title'] = "UW Class Search"
         template = JINJA_ENVIRONMENT.get_template('your_class_form.html')
@@ -39,7 +39,7 @@ class MainHandler(webapp2.RequestHandler):
 class GreetResponseHandlr(webapp2.RequestHandler):
     def post(self):
         SLN = self.request.get('SLN')
-        latlng = self.request.headers.get("X-AppEngine-CityLatLong", None)
+        #latlng = self.request.headers.get("X-AppEngine-CityLatLong", None)
         dict = getDict()
 
         if SLN:
