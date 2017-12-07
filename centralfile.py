@@ -25,7 +25,7 @@ print(thumbnailsList)
 
 
 
-htmlInfo = {'score': score, 'thumbnails': thumbnailsList, 'SLN': SLN, 'professor': dict[SLN]["instructor"]}
+htmlInfo = {'score': score, 'thumbnails': thumbnailsList, 'SLN': SLN, 'professor': dict[SLN]["instructor"], 'classroom': building_and_num}
 fname = "your-class.html"
 f = open(fname, 'w')
 
