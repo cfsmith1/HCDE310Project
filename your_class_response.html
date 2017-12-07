@@ -31,8 +31,11 @@
     <div class="inputBox">
         <h2>Classroom Photos</h2>
         <div>Classroom: <strong>{{classroom}}</strong></div>
-        {% for photo in thumbnails %}
-            <img src={{photo}} alt = {{SLN}}>
+        {% if thumnails == [] %}
+            <body>There are no images available for this classroom.</body>
+        {% else%}
+            {for photo in thumbnails %}
+                <img src={{photo}} alt = {{SLN}}>
         {% endfor %}
     </div>
     <div class="inputBox">
