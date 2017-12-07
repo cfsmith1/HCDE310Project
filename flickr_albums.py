@@ -96,7 +96,6 @@ def IDstoURLS(photoalbum, photoalbumID):
 # classroom maps to thumbnail URLs for each photo of the classroom interior
 def userInputToURLs(inputFromCentral):
     photoSetIDDict = classroomAndItsID()
-    print(photoSetIDDict)
     if inputFromCentral in photoSetIDDict:
         photoalbumID = photoSetIDDict[inputFromCentral]
         URLS = IDstoURLS(inputFromCentral, photoalbumID)
