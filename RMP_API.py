@@ -1,8 +1,9 @@
 import json
-import urllib.request
+#import urllib.request
 import urllib.error
 import urllib.parse
 import ssl
+import urllib2
 
 def pretty(obj):
     return json.dumps(obj, sort_keys=True, indent=2)
@@ -44,13 +45,18 @@ def rmp_REST(baseurl = 'http://www.ratemyprofessors.com/find/professor/',
     if printurl:
         print(url)
     safeURL = safe_URL(url)
-    opener = AppURLopener()
-    response = opener.open(safeURL).read()
+
+    hdr = {'User-Agent': 'Mozilla/5.0'}
+    req = urllib2.Request(url, headers=hdr)
+    response = urllib2.urlopen(req).read()
+
+    #opener = AppURLopener()
+    #response = opener.open(safeURL).read()
     resultsPage = json.loads(response)
     return resultsPage
 
-class AppURLopener(urllib.request.FancyURLopener): #Code From: https://stackoverflow.com/questions/16627227/http-error-403-in-python-3-web-scraping
-    version = "Mozilla/5.0"
+#class AppURLopener(urllib.request.FancyURLopener): #Code From: https://stackoverflow.com/questions/16627227/http-error-403-in-python-3-web-scraping
+    #version = "Mozilla/5.0"
 
 def getScore(name, department=""):
 #How do we deal with edge cases with people with the same name?
