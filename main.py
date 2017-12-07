@@ -48,8 +48,11 @@ class GreetResponseHandlr(webapp2.RequestHandler):
             building = dict[str(SLN)]["building"]
             roomnum = dict[str(SLN)]["room"]
             building_and_num = building + " " + roomnum
-            htmlInfo = {'score': getProfessor(SLN, dict), 'thumbnails': getClassroom(SLN, dict), 'SLN': SLN,
+            htmlInfo = {'score': getProfessor(SLN, dict), 'SLN': SLN,
                         'professor': dict[SLN]["instructor"], 'classroom': building_and_num}
+            thumbnails = getClassroom(SLN, dict)
+            if thumbnails:
+                htmlInfo['thumbnails'] = thumbnails
             fname = "your_class_response.html"
             template = JINJA_ENVIRONMENT.get_template(fname)
             self.response.write(template.render(htmlInfo))
