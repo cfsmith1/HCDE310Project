@@ -4,39 +4,72 @@ JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-SLN = input("What is the SLN of your class? ")
-with open('data.txt', 'r') as myfile:
-    data = myfile.read()
-    dict = json.loads(data)
+def getSLN():
+    SLN = input("What is the SLN of your class? ")
 
-#Get RateMyProfessor
-professor = dict[str(SLN)]["instructor"]
-print(professor)
-score = RMP_API.sendScore(professor)
-print(score)
+def getDict():
+    with open('data.txt', 'r') as myfile:
+        data = myfile.read()
+        return json.loads(data)
+
+def getProfessor(SLN, dict):
+    professor = dict[str(SLN)]["instructor"]
+    print(professor)
+    score = RMP_API.sendScore(professor)
+    print(score)
+    return score
 
 #Get Classroom Info
-building = dict[str(SLN)]["building"]
-roomnum = dict[str(SLN)]["room"]
-building_and_num = building + " " + roomnum
-print(building_and_num)
-thumbnailsList = flickr_albums.userInputToURLs(building_and_num)
-print(thumbnailsList)
+def getClassroom(SLN, dict):
+    building = dict[str(SLN)]["building"]
+    roomnum = dict[str(SLN)]["room"]
+    building_and_num = building + " " + roomnum
+    thumbnailsList = flickr_albums.userInputToURLs(building_and_num)
+    print(thumbnailsList)
+    return thumbnailsList
+
+class MainHandler(webapp2.RequestHandler):
+    def get(self):
+        logging.info("In MainHandler")
+        template_values = {}
+        template_values['page_title'] = "UW Class Search"
+        template = JINJA_ENVIRONMENT.get_template('your_class_form.html')
+        self.response.write(template.render(template_values))
+
+class GreetResponseHandlr(webapp2.RequestHandler):
+    def post(self):
+        SLN = self.request.get('SLN')
+        latlng = self.request.headers.get("X-AppEngine-CityLatLong", None)
+        dict = getDict()
+
+        if SLN:
+            SLN = self.request.get('SLN')
+            vals['SLN'] = SLN
+            building = dict[str(SLN)]["building"]
+            roomnum = dict[str(SLN)]["room"]
+            building_and_num = building + " " + roomnum
+            htmlInfo = {'score': getProfessor(SLN, dict), 'thumbnails': getClassroom(SLN, dict), 'SLN': getSLN(),
+                        'professor': dict[SLN]["instructor"], 'classroom': building_and_num}
+            fname = "your_class_response.html"
+            template = JINJA_ENVIRONMENT.get_template(fname)
+            self.response.write(template.render(htmlInfo))
+            webbrowser.open('your_class_response.html')
+        else:
+            template = JINJA_ENVIRONMENT.get_template('your_class_form.html')
+            htmlInfo = {'page_title': 'ERROR'}
+            self.response.write(template.render(htmlInfo))
 
 
 
-htmlInfo = {'score': score, 'thumbnails': thumbnailsList, 'SLN': SLN, 'professor': dict[SLN]["instructor"], 'classroom': building_and_num}
-fname = "your-class.html"
-f = open(fname, 'w')
+        #template_values = {}
+        #template_values['page_title'] = "Flickr Tag Search"
 
-#template_values = {}
-#template_values['page_title'] = "Flickr Tag Search"
 
-template = JINJA_ENVIRONMENT.get_template('ClassesTemplate.html')
-f = open(fname,"w")
 
-#response.write(template.render(template_values))
 
-f.write(template.render(htmlInfo))
-f.close()
-webbrowser.open('your-class.html')
+
+application = webapp2.WSGIApplication([ \
+                                      ('/gresponse', GreetResponseHandlr),
+                                      ('/.*', MainHandler)
+                                      ],
+                                      debug=True)
