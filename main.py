@@ -64,10 +64,6 @@ class GreetResponseHandlr(webapp2.RequestHandler):
         #template_values = {}
         #template_values['page_title'] = "Flickr Tag Search"
 
-
-
-
-
 application = webapp2.WSGIApplication([ \
                                       ('/gresponse', GreetResponseHandlr),
                                       ('/.*', MainHandler)
