@@ -82,15 +82,13 @@ def photoAlbumtoIndividual(photoalbum):
 # creates a dictonary of the URLS for each photo within an album
 def IDstoURLS(photoalbum, photoalbumID):
     DictofPhotosIDInClassroomAlbum = photoAlbumtoIndividual(photoalbumID)
-    dictOfURLS = {}
     listOfThumbnailURLs = []
     for individualID in DictofPhotosIDInClassroomAlbum[photoalbumID]:
         thumbnailInfo = \
         json.loads(flickrREST(method='flickr.photos.getInfo', params={'photo_id': individualID}).read())['photo']
         thumbnailURL = 'https://farm' + str(thumbnailInfo['farm']) + '.staticflickr.com/' + str(thumbnailInfo['server']) + '/' + str(individualID) + '_' + str(thumbnailInfo['secret']) + '_q.jpg'
         listOfThumbnailURLs.append(thumbnailURL)
-    dictOfURLS[photoalbum] = listOfThumbnailURLs
-    return dictOfURLS
+    return listOfThumbnailURLs
 
 # takes in user input for the classroom they wish to see and calls other methods to create a dictorary where the
 # classroom maps to thumbnail URLs for each photo of the classroom interior
