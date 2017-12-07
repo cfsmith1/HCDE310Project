@@ -4,8 +4,8 @@ JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-def getSLN():
-    SLN = input("What is the SLN of your class? ")
+#def getSLN():
+#    SLN = input("What is the SLN of your class? ")
 
 def getDict():
     with open('data.txt', 'r') as myfile:
