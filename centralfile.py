@@ -1,17 +1,14 @@
-import json, jinja2
-import RMP_API
-import flickr_albums
+import json, jinja2, RMP_API, flickr_albums, os
 
-#JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
-#    extensions=['jinja2.ext.autoescape'],
-#    autoescape=True)
+JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
 
 SLN = input("What is the SLN of your class? ")
 with open('data.txt', 'r') as myfile:
     data = myfile.read()
     dict = json.loads(data)
 
-#print(str(dict))
 #Get RateMyProfessor
 professor = dict[str(SLN)]["instructor"]
 print(professor)

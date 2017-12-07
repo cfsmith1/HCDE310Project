@@ -67,7 +67,10 @@ def getScore(name, department=""):
 
 #Working with the rest of the files.
 def sendScore(professor):
-    professorNoComma = professor.replace(",", " ")
-    professorSplit = professorNoComma.split()
-    professorSearch= professorSplit[0] + " " + professorSplit[1]
-    return getScore(professorSearch)
+    if professor == "TBA":
+        return "Sorry a professor has not yet been chosen for this course"
+    else:
+        professorNoComma = professor.replace(",", " ")
+        professorSplit = professorNoComma.split()
+        professorSearch= professorSplit[0] + " " + professorSplit[1]
+        return getScore(professorSearch)
