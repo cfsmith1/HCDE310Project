@@ -44,7 +44,7 @@ class GreetResponseHandlr(webapp2.RequestHandler):
 
         if SLN:
             SLN = self.request.get('SLN')
-            vals['SLN'] = SLN
+            #vals['SLN'] = SLN
             building = dict[str(SLN)]["building"]
             roomnum = dict[str(SLN)]["room"]
             building_and_num = building + " " + roomnum
