@@ -30,9 +30,9 @@ div.inputBox p {
     color: #000000;
 }
 
-input[type="submit"] {
-    font-family:"Roboto", sans-serif;
+button {
+    font-family: 'Roboto', sans-serif;
     border: 3px;
     padding: 2px;
-    font-size:16px
+    font-size:16px;
 }
