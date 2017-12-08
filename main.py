@@ -50,7 +50,7 @@ class GreetResponseHandlr(webapp2.RequestHandler):
 
         dict = getDict()
 
-        if SLN:
+        if SLN and SLN in dict:
             #SLN = self.request.get('SLN')
             #vals['SLN'] = SLN
             building = dict[str(SLN)]["building"]
