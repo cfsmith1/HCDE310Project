@@ -31,9 +31,11 @@ div.inputBox p {
 }
 
 input[type=submit] {
+    background-color: #5a00af;
+    color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
-    border-width: 3px;
-    border-color: #000000;
-    border-radius: 4px
+    border: 1px solid #000000;
+    border-radius: 4px;
+    padding: 3px;
 }
