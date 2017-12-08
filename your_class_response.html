@@ -13,7 +13,7 @@
     </div>
     <div class="inputBox">
         <h2>Classroom Photos</h2>
-        <div>Classroom: <strong>{{classroom}}</strong></div>
+        <div> Classroom: <strong>{{classroom}}</strong></div>
         {% if thumbnails %}
             {% for photo in thumbnails %}
                 <img src={{photo}} alt = {{SLN}}>
@@ -23,13 +23,13 @@
         {% endif %}
     </div>
     <div class="inputBox">
-        <h2>Location:</h2>
+        <h2> Location on a Map:</h2>
         <div><a href="{{maplink}}">{{building}}</a></div>
     </div>
     <div class="inputBox">
         <h2>Professor Info:</h2>
-        <div>Professor name: {{professor}}</div>
-        <div>Rate My Professor Score: {{ score }}</div>
+        <div> Professor name: {{professor}}</div>
+        <div> Rate My Professor Score: {{ score }}</div>
     </div>
     <div class="inputBox">
         <form action="/" method="get">
