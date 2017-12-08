@@ -1,4 +1,4 @@
-import json, jinja2, RMP_API, flickr_albums, os, webbrowser, urllib2, webapp2
+import json, jinja2, RMP_API, flickr_albums, os, webbrowser, urllib2, webapp2, re
 
 JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
@@ -36,10 +36,18 @@ class MainHandler(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('your_class_form.html')
         self.response.write(template.render(template_values))
 
+def checkInput(input):
+    SLNSearch = re.match(r'\d{5}', input, re.M | re.I)
+    if SLNSearch:
+        return SLNSearch.group().strip()
+    else:
+        return None
+
 class GreetResponseHandlr(webapp2.RequestHandler):
     def post(self):
         SLN = self.request.get('SLN')
-        #latlng = self.request.headers.get("X-AppEngine-CityLatLong", None)
+        SLN = checkInput(SLN)
+
         dict = getDict()
 
         if SLN:
@@ -59,7 +67,7 @@ class GreetResponseHandlr(webapp2.RequestHandler):
             self.response.write(template.render(htmlInfo))
             webbrowser.open('your_class_response.html')
         else:
-            template = JINJA_ENVIRONMENT.get_template('your_class_form.html')
+            template = JINJA_ENVIRONMENT.get_template('your_class_error.html')
             htmlInfo = {'page_title': 'ERROR'}
             self.response.write(template.render(htmlInfo))
 
