@@ -44,9 +44,12 @@ def checkInput(input):
         return None
 
 def fixProfName(name):
-    namelist = name.split(",")
-    newname = "%s %s"%(str(namelist[1]), str(namelist[0]))
-    return newname
+    if not name == "TBA":
+        namelist = name.split(",")
+        newname = "%s %s"%(str(namelist[1]), str(namelist[0]))
+        return newname
+    else:
+        return "TBA"
 
 def getMapURL(building):
     baseurl = "https://www.washington.edu/maps/#!/"
@@ -64,7 +67,10 @@ class GreetResponseHandlr(webapp2.RequestHandler):
             #vals['SLN'] = SLN
             building = dict[str(SLN)]["building"]
             roomnum = dict[str(SLN)]["room"]
-            building_and_num = building + " " + roomnum
+            if not building == "TBA":
+                building_and_num = building + " " + roomnum
+            else:
+                building_and_num = "This course has not yet been assigned a classroom."
             htmlInfo = {'score': getProfessor(SLN, dict), 'SLN': SLN,
                         'professor': fixProfName(dict[SLN]["instructor"]), 'classroom': building_and_num,
                         'maplink': getMapURL(building), 'building': building}
