@@ -4,9 +4,6 @@ JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-#def getSLN():
-#    SLN = input("What is the SLN of your class? ")
-
 def getDict():
     with open('data.txt', 'r') as myfile:
         data = myfile.read()
@@ -30,7 +27,6 @@ def getClassroom(SLN, dict):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        #logging.info("In MainHandler")
         template_values = {}
         template_values['page_title'] = "UW Class Search"
         template = JINJA_ENVIRONMENT.get_template('your_class_form.html')
@@ -86,9 +82,6 @@ class GreetResponseHandlr(webapp2.RequestHandler):
             template = JINJA_ENVIRONMENT.get_template('your_class_error.html')
             htmlInfo = {'page_title': 'ERROR'}
             self.response.write(template.render(htmlInfo))
-
-        #template_values = {}
-        #template_values['page_title'] = "Flickr Tag Search"
 
 application = webapp2.WSGIApplication([ \
                                       ('/gresponse', GreetResponseHandlr),
