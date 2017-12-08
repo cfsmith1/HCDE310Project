@@ -43,6 +43,11 @@ def checkInput(input):
     else:
         return None
 
+def fixProfName(name):
+    namelist = name.split(",")
+    newname = namelist[1], " ", namelist[0]
+    return newname
+
 class GreetResponseHandlr(webapp2.RequestHandler):
     def post(self):
         SLN = self.request.get('SLN')
@@ -57,7 +62,7 @@ class GreetResponseHandlr(webapp2.RequestHandler):
             roomnum = dict[str(SLN)]["room"]
             building_and_num = building + " " + roomnum
             htmlInfo = {'score': getProfessor(SLN, dict), 'SLN': SLN,
-                        'professor': dict[SLN]["instructor"], 'classroom': building_and_num}
+                        'professor': fixProfName(dict[SLN]["instructor"]), 'classroom': building_and_num}
             thumbnails = getClassroom(SLN, dict)
             #htmlInfo['thumbnails-text'] = str(thumbnails)
             if thumbnails:

@@ -5,7 +5,7 @@ threadsafe: yes
 handlers:
 - url: /assets
   static_dir: assets
-  
+
 - url: /stylesheets
   static_dir: stylesheets
 - url: /images
