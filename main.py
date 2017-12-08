@@ -45,7 +45,7 @@ def checkInput(input):
 
 def fixProfName(name):
     namelist = name.split(",")
-    newname = namelist[1], " ", namelist[0]
+    newname = "%s %s"%(str(namelist[1]), str(namelist[0]))
     return newname
 
 class GreetResponseHandlr(webapp2.RequestHandler):
