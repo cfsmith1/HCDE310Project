@@ -48,6 +48,10 @@ def fixProfName(name):
     newname = "%s %s"%(str(namelist[1]), str(namelist[0]))
     return newname
 
+def getMapURL(building):
+    baseurl = "https://www.washington.edu/maps/#!/"
+    return "" + baseurl + building
+
 class GreetResponseHandlr(webapp2.RequestHandler):
     def post(self):
         SLN = self.request.get('SLN')
@@ -62,7 +66,8 @@ class GreetResponseHandlr(webapp2.RequestHandler):
             roomnum = dict[str(SLN)]["room"]
             building_and_num = building + " " + roomnum
             htmlInfo = {'score': getProfessor(SLN, dict), 'SLN': SLN,
-                        'professor': fixProfName(dict[SLN]["instructor"]), 'classroom': building_and_num}
+                        'professor': fixProfName(dict[SLN]["instructor"]), 'classroom': building_and_num,
+                        'maplink': getMapURL(building), 'building': building}
             thumbnails = getClassroom(SLN, dict)
             #htmlInfo['thumbnails-text'] = str(thumbnails)
             if thumbnails:
