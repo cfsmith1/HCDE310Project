@@ -1,12 +1,11 @@
 # HCDE310Project
 
-## [Name of App]
+## CourseHub
 
-### [Intro]
-To Be Written
+### Intro
+Allows a user to input a University of Washington - Seattle Campus SLN and will output a webpage with photos of the classroom, link to the classroom on the UW map, and the professor's Rate My Professor Score
 
-### [Documentation]
-Insert here when we know what we're saying
+Some components of the application include: a program to scrape the UW time schedule, a program that finds the professor's rate my professor score, and a program that finds the corresponding Flickr album. There is also HTML to create a homepage, error page, and response page for UW CourseHub
 
 ### Known Bugs
 Below are list of known bugs in the application code.
@@ -17,9 +16,9 @@ Below are list of known bugs in the application code.
 time or place.
 3. Code only scrapes a limited number of classes due to testing stages.
 
-#### Flickr API
+#### flickr_albums.py
 1. If there are no photos of the classroom on flickr, the it returns None
 
-#### RMP_API?.py
+#### RMP_API.py
 1. Cannot handle searches of both professor name and department
 2. Cannot differentiate professors if two professors have the same name and teach at the same school
