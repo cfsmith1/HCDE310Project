@@ -9,6 +9,7 @@ Some components of the application include: a program to scrape the UW time sche
 
 ### Live Version and Demo
 A live version of the application can be accessed at: https://hip-caster-185923.appspot.com/
+
 A Youtube Demo of the application can be found at: https://youtu.be/MlcxktyrLro
 
 ### Known Bugs
